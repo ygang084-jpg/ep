@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>경험정리 — 나의 경험이 길이 된다</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================================================ app-header ============================================================ -->
+  <header id="app-header">
+    <div class="header-tag">#app-header — 전역 헤더 / 네비게이션</div>
+    <div class="container bar">
+      <div class="logo">경험정리<span>.</span></div>
+      <nav class="nav-links">
+        <a href="#dashboard">대시보드</a>
+        <a href="#experience-archive">경험 아카이브</a>
+        <a href="#ai-workshop">AI 워크숍</a>
+        <a href="#company-research">기업분석</a>
+        <a href="#application-canvas">자소서 빌더</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-ghost">로그인</a>
+        <a href="#dashboard" class="btn btn-primary">시작하기</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================ hero (제목 + 달력) ============================================================ -->
+    <section id="hero" data-section>
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <span class="section-tag">hero <span class="kr">· 히어로 / 핵심 메시지</span></span>
+          <h1>흩어진 경험이 모여,<br /><span class="hl">나의 길</span>이 됩니다.</h1>
+          <p class="lead">
+            프로젝트·대외활동·인턴 경험을 기록하고 STAR로 정리해, 자소서 문항에 딱 맞게 연결하세요.
+            오늘 쌓은 한 걸음이 내일의 합격으로 이어집니다.
+          </p>
+          <div class="btn-row">
+            <a href="#dashboard" class="btn btn-primary">회원가입 없이 시작하기</a>
+            <a href="#feature-overview" class="btn btn-ghost">기능 둘러보기</a>
+          </div>
+        </div>
+
+        <!-- 나의 채용 현황 달력 -->
+        <div class="hero-cal card">
+          <div class="cal-head">
+            <button class="cal-nav" id="cal-prev" type="button" aria-label="이전 달">‹</button>
+            <span class="cal-title" id="cal-title"></span>
+            <button class="cal-nav" id="cal-next" type="button" aria-label="다음 달">›</button>
+          </div>
+          <div class="cal-status" id="cal-status"></div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <div class="cal-legend"><span><i class="lg today"></i> 오늘</span><span><i class="lg due"></i> 자소서 마감</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ feature-overview (흐름형·클릭 이동) ============================================================ -->
+    <section id="feature-overview" data-section>
+      <div class="container">
+        <span class="section-tag">feature-overview <span class="kr">· 핵심 기능 개요</span></span>
+        <p class="flow-lead">경험 기록 → 정리 → 분석 → 자소서까지, 이렇게 이어집니다. <span class="hint">카드를 누르면 해당 화면으로 이동해요.</span></p>
+        <div class="flow">
+          <a href="#dashboard" class="flow-step"><span class="fs-num">01</span><span class="fs-name">대시보드</span><span class="fs-desc">역량 현황</span></a>
+          <span class="flow-arrow">→</span>
+          <a href="#experience-archive" class="flow-step"><span class="fs-num">02</span><span class="fs-name">경험 아카이브</span><span class="fs-desc">타임라인·STAR</span></a>
+          <span class="flow-arrow">→</span>
+          <a href="#ai-workshop" class="flow-step"><span class="fs-num">03</span><span class="fs-name">AI 워크숍</span><span class="fs-desc">문장 재구성</span></a>
+          <span class="flow-arrow">→</span>
+          <a href="#company-research" class="flow-step"><span class="fs-num">04</span><span class="fs-name">기업분석</span><span class="fs-desc">직무·KPI</span></a>
+          <span class="flow-arrow">→</span>
+          <a href="#application-canvas" class="flow-step"><span class="fs-num">05</span><span class="fs-name">자소서 빌더</span><span class="fs-desc">경험 연결</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ dashboard ============================================================ -->
+    <section id="dashboard" data-section>
+      <div class="container">
+        <span class="section-tag">dashboard <span class="kr">· 대시보드</span></span>
+        <h2 id="dash-greeting">반가워요! 이번 주도 한 걸음 나아갔어요</h2>
+        <p class="lead">기록한 경험을 기반으로 쌓인 역량과, 지금 챙겨야 할 일들을 모아 보여드려요.</p>
+
+        <div class="dash-grid">
+          <!-- 나의 역량 현황 (포인트 강조) -->
+          <div class="card dash-monitor">
+            <div class="card-head"><h3><i class="pt-dot"></i>나의 역량 현황</h3><span class="hint">기록한 경험 태그 기반</span></div>
+            <div class="monitor-body">
+              <div id="spider-chart" class="spider-wrap"></div>
+              <div id="competency-bars" class="comp-bars"></div>
+            </div>
+          </div>
+
+          <div class="dash-side">
+            <div class="card">
+              <div class="card-head"><h3>리마인드 넛지</h3></div>
+              <div id="nudge-list" class="nudge-list"></div>
+            </div>
+            <div class="card">
+              <div class="card-head"><h3>자소서 바로가기</h3></div>
+              <div id="dday-list" class="dday-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ experience-archive ============================================================ -->
+    <section id="experience-archive" data-section>
+      <div class="container">
+        <span class="section-tag">experience-archive <span class="kr">· 경험 아카이브 / 탄약고</span></span>
+        <h2>경험 아카이브 — 자소서 소스가 되는 나의 탄약고</h2>
+        <p class="lead">경험을 기록하면 타임라인으로 쌓입니다. 카드를 클릭해 오른쪽에서 STAR로 정리하세요.</p>
+
+        <form id="exp-add-form" class="panel panel-exp">
+          <div class="field">
+            <label>제목</label>
+            <input id="exp-title" type="text" placeholder="예: 종합설계 캡스톤 프로젝트" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label>카테고리</label>
+            <select id="exp-category">
+              <option value="프로젝트">프로젝트</option>
+              <option value="인턴">인턴</option>
+              <option value="대외활동">대외활동</option>
+              <option value="공모전">공모전</option>
+              <option value="동아리">동아리</option>
+              <option value="학생회">학생회</option>
+              <option value="아르바이트">아르바이트</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>기간</label>
+            <input id="exp-period" type="text" placeholder="예: 2025.03–06" autocomplete="off" />
+          </div>
+          <div class="field field-wide">
+            <label>한 줄 요약</label>
+            <input id="exp-summary" type="text" placeholder="예: IoT 팀 프로젝트에서 데이터 파이프라인 구축" autocomplete="off" />
+          </div>
+          <div class="field field-wide">
+            <label>역량 태그 <span class="hint">최대 3개 선택</span></label>
+            <div id="exp-tag-picker" class="tag-picker"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">경험 추가</button>
+        </form>
+
+        <div class="split">
+          <div class="split-left">
+            <div class="archive-toolbar">
+              <div class="view-toggle" id="view-toggle">
+                <button class="vt-btn is-active" data-view="list" type="button">전체</button>
+                <button class="vt-btn" data-view="period" type="button">기간별</button>
+              </div>
+            </div>
+            <div class="tag-filter" id="tag-filter"></div>
+            <div id="timeline-feed" class="timeline"></div>
+          </div>
+          <aside class="split-right">
+            <div id="star-builder" class="star-builder"></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ ai-workshop (변경 없음) ============================================================ -->
+    <section id="ai-workshop" data-section>
+      <div class="container">
+        <span class="section-tag">ai-workshop <span class="kr">· AI 문장 재구성터</span></span>
+        <h2>AI 문장 재구성터 — 대학생 표현을 실무자 언어로</h2>
+        <p class="lead">투박한 초안을 넣으면 직무에 맞춰 다듬은 3가지 버전을 추천해 드려요.</p>
+        <div class="notice">키워드/템플릿 기반 <b>데모</b>입니다. LLM API 연동 시 실제 문장 변환으로 교체됩니다.</div>
+
+        <div class="panel workshop-input">
+          <div class="field field-wide">
+            <label>원문 <span class="hint">대학생식 표현 그대로 편하게</span></label>
+            <textarea id="ws-input" rows="3" placeholder="예: 조원들과 친해져서 열심히 피드백을 주고받았습니다."></textarea>
+          </div>
+          <div class="field">
+            <label>목표 직무</label>
+            <select id="ws-job">
+              <option value="tech">기술 / 엔지니어링</option>
+              <option value="pm">기획 / 사업관리</option>
+              <option value="mkt">마케팅</option>
+              <option value="design">디자인</option>
+              <option value="general">일반</option>
+            </select>
+          </div>
+          <button id="ws-run" type="button" class="btn btn-primary">문장 변환</button>
+        </div>
+        <div id="workshop-output" class="workshop-output"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ company-research (기업분석/직무분석) ============================================================ -->
+    <section id="company-research" data-section>
+      <div class="container">
+        <span class="section-tag">company-research <span class="kr">· 기업분석 / 직무분석</span></span>
+        <h2>기업분석 — 자소서의 방향타를 세우기</h2>
+        <p class="lead">지원 기업의 DNA·사업/시장/재무·직무 KPI·이슈를 정리해 두면, 자소서 문항과 경험 매칭의 기준이 됩니다.</p>
+
+        <!-- 기업 추가 -->
+        <form id="company-add-form" class="panel panel-company">
+          <div class="field"><label>기업명</label><input id="co-name" type="text" placeholder="예: OO전자" autocomplete="off" /></div>
+          <div class="field"><label>직무</label>
+            <select id="co-job">
+              <option value="tech">기술 / 엔지니어링</option>
+              <option value="pm">기획 / 사업관리</option>
+              <option value="mkt">마케팅</option>
+              <option value="design">디자인</option>
+              <option value="general">일반</option>
+            </select>
+          </div>
+          <div class="field"><label>마감일 <span class="hint">YYYY-MM-DD</span></label><input id="co-deadline" type="text" placeholder="2026-07-15" autocomplete="off" /></div>
+          <div class="field"><label>기본 글자 수</label><input id="co-limit" type="text" inputmode="numeric" placeholder="1000" autocomplete="off" /></div>
+          <button type="submit" class="btn btn-primary">기업 추가</button>
+        </form>
+
+        <!-- 기업 선택 탭 -->
+        <div id="research-tabs" class="app-tabs"></div>
+
+        <!-- 분석 입력 폼 -->
+        <div id="research-body"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ application-canvas (자소서 빌더) ============================================================ -->
+    <section id="application-canvas" data-section>
+      <div class="container">
+        <span class="section-tag">application-canvas <span class="kr">· 자소서 빌더</span></span>
+        <h2>자소서 빌더 — 경험을 문항에 배치하기</h2>
+        <p class="lead">기업별 문항에 답을 쓰되, 왼쪽 경험 카드를 답변 칸으로 드래그하면 STAR 초안이 채워집니다.</p>
+
+        <!-- 기업 선택 탭 (기업분석과 공유) -->
+        <div id="canvas-tabs" class="app-tabs"></div>
+
+        <!-- 문항 추가 -->
+        <form id="question-add-form" class="panel panel-question">
+          <div class="field field-wide"><label>자소서 문항</label>
+            <textarea id="q-text" rows="2" placeholder="예: 공동의 목표를 달성하기 위해 노력했던 경험을 기술하시오."></textarea>
+          </div>
+          <div class="field"><label>글자 수 제한</label><input id="q-limit" type="text" inputmode="numeric" placeholder="비우면 기본값" autocomplete="off" /></div>
+          <button type="submit" class="btn btn-primary">문항 추가</button>
+        </form>
+
+        <!-- KPI 단어장 -->
+        <div id="kpi-wordbank" class="wordbank"></div>
+
+        <!-- 2분할: 좌 경험 / 우 문항+답변 -->
+        <div class="split">
+          <div class="split-left">
+            <div class="split-head">내 경험 <span class="hint">드래그해서 답변 칸에 넣기</span></div>
+            <div id="canvas-exp-list" class="timeline"></div>
+          </div>
+          <div class="split-right-wide">
+            <div id="canvas-questions" class="canvas-questions"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================ footer ============================================================ -->
+  <footer id="app-footer">
+    <div class="container">
+      <span class="footer-tag">#app-footer — 전역 푸터</span>
+      <div class="foot-grid">
+        <div>
+          <div class="logo">경험정리<span>.</span></div>
+          <p class="foot-desc">흩어진 경험이 모여, 나의 길이 됩니다. 대학생·취준생을 위한 경험정리 앱.</p>
+        </div>
+        <div>
+          <h4>기능</h4>
+          <a href="#dashboard">대시보드</a>
+          <a href="#experience-archive">경험 아카이브</a>
+          <a href="#ai-workshop">AI 워크숍</a>
+          <a href="#company-research">기업분석</a>
+          <a href="#application-canvas">자소서 빌더</a>
+        </div>
+        <div>
+          <h4>정보</h4>
+          <a href="#feature-overview">기능 소개</a>
+          <a href="#hero">서비스 소개</a>
+        </div>
+        <div>
+          <h4>정책</h4>
+          <a href="#">개인정보 처리방침</a>
+          <a href="#">이용약관</a>
+        </div>
+      </div>
+      <div class="copyright">© 2026 경험정리. 프로토타입 — 데이터는 브라우저에만 저장됩니다.</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
