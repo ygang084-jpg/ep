@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>경험정리 — 나의 경험이 길이 된다</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css" />
+  <style>
+/* =========================================================
+   경험정리 · styles.css
+   디자인: 청록/Teal (클로드디자인.md) + 대비 포인트색(코랄오렌지)
+   폰트: Pretendard
+   ========================================================= */
+
+:root {
+  --primary:      #128a7c;
+  --primary-deep: #0e8c82;
+  --secondary:    #2fa891;
+  --accent:       #ea7e62;
+  --success:      #17a06a;
+  --warning:      #d97706;
+  --warning-bg:   #fef3c7;
+
+  /* 대비 포인트색 */
+  --point:        #ff6a3d;
+  --point-deep:   #e2521f;
+  --point-soft:   #fff0ea;
+
+  --ink-deep:     #17342f;
+  --ink-strong:   #35443f;
+  --body:         #55655f;
+  --muted:        #7d8a85;
+  --muted-light:  #9eb4ad;
+  --placeholder:  #adbab4;
+  --border:       #d3e0da;
+  --border-strong:#bcc8c2;
+
+  --canvas:       #e3ede9;
+  --screen:       #f1f6f3;
+  --surface:      #ffffff;
+  --tint:         #e1f2ee;
+  --tint2:        #e4f1ea;
+
+  --shadow-sm: 0 1px 3px rgba(20,48,43,0.06);
+  --shadow-md: 0 8px 24px rgba(20,48,43,0.08);
+  --shadow-lg: 0 18px 46px rgba(20,48,43,0.14);
+
+  --cat-프로젝트: #128a7c;
+  --cat-인턴:     #0e8c82;
+  --cat-공모전:   #2fa891;
+  --cat-동아리:   #3aa0d0;
+  --cat-대외활동: #7b6ef0;
+  --cat-학생회:   #ff6a3d;
+  --cat-아르바이트:#d99a2b;
+
+  --radius:  18px;
+  --radius-lg: 22px;
+  --maxw:    1120px;
+  --font: "Pretendard", "Pretendard Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --mono: "SF Mono", "Consolas", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); color: var(--ink-strong); background: var(--screen); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+section[data-section] { position: relative; padding: clamp(40px, 6vw, 64px) 0; border-bottom: 1px solid var(--border); background: var(--surface); }
+section[data-section]:nth-of-type(even) { background: var(--screen); }
+
+.section-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.2px; color: var(--primary); background: var(--tint); border: 1px solid #cae7e0; border-radius: 999px; padding: 5px 13px; margin-bottom: 18px; font-family: var(--mono); }
+.section-tag::before { content: "#"; opacity: 0.55; }
+.section-tag .kr { font-family: var(--font); font-weight: 600; color: var(--muted); }
+
+h1, h2, h3, h4 { line-height: 1.25; letter-spacing: -0.02em; color: var(--ink-deep); text-wrap: balance; }
+h2 { font-size: clamp(22px, 4vw, 28px); font-weight: 800; margin-bottom: 10px; }
+h3 { font-size: 17px; font-weight: 700; }
+h4 { font-size: 14px; font-weight: 700; }
+p.lead { color: var(--body); font-size: clamp(15px, 2vw, 16px); max-width: 680px; }
+.hint { font-weight: 500; font-size: 12px; color: var(--muted); }
+
+.grid { display: grid; gap: 20px; margin-top: 28px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow-sm); }
+.card .badge { display: inline-block; font-size: 11px; font-weight: 700; color: #fff; background: var(--primary); border-radius: 8px; padding: 3px 9px; margin-bottom: 12px; }
+.card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+
+/* 버튼 */
+.btn { display: inline-flex; align-items: center; justify-content: center; height: 50px; padding: 0 22px; border-radius: 16px; font-size: 15px; font-weight: 700; cursor: pointer; border: 1.5px solid transparent; text-decoration: none; font-family: var(--font); transition: filter .12s ease, background .12s ease; white-space: nowrap; }
+.btn-primary { background: var(--primary); color: #fff; box-shadow: 0 6px 16px rgba(18,138,124,0.26); }
+.btn-primary:hover { filter: brightness(1.05); }
+.btn-point { background: var(--point); color: #fff; box-shadow: 0 6px 16px rgba(255,106,61,0.28); }
+.btn-point:hover { filter: brightness(1.04); }
+.btn-ghost { background: var(--surface); color: var(--ink-strong); border-color: var(--border-strong); }
+.btn-ghost:hover { background: var(--tint2); }
+.btn-danger { background: #fff; color: var(--point); border-color: #f6cdbe; }
+.btn-danger:hover { background: var(--point-soft); }
+.btn-sm { height: 38px; padding: 0 14px; font-size: 13px; border-radius: 12px; }
+.btn-row { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+.link-btn { background: none; border: none; color: var(--muted); font-size: 13px; cursor: pointer; text-decoration: underline; font-family: var(--font); }
+.link-btn:hover { color: var(--point); }
+
+/* 폼 */
+.panel { margin-top: 28px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); display: grid; gap: 16px; align-items: end; }
+.panel-exp { grid-template-columns: 1.4fr 1fr 1fr auto; }
+.panel-company { grid-template-columns: 1.4fr 1fr 1fr 1fr auto; }
+.panel-question { grid-template-columns: 1fr 160px auto; }
+.workshop-input { grid-template-columns: 1fr auto; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field-wide { grid-column: 1 / -1; }
+.field label { font-size: 13px; font-weight: 700; color: var(--ink-strong); }
+input[type="text"], textarea, select { width: 100%; font-family: var(--font); font-size: 15px; color: var(--ink-strong); background: var(--screen); border: 1.5px solid var(--border); border-radius: 14px; padding: 13px 15px; outline: none; resize: vertical; }
+input::placeholder, textarea::placeholder { color: var(--placeholder); }
+input:focus, textarea:focus, select:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px var(--tint); }
+.panel .btn { align-self: end; }
+.empty-note { color: var(--muted); font-size: 14px; text-align: center; padding: 26px; border: 1px dashed var(--border); border-radius: var(--radius); background: var(--tint2); }
+
+/* 태그 칩 */
+.tag-picker, .tag-filter { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag-filter { margin-bottom: 16px; }
+.tag-chip { border: 1.5px solid var(--border); background: var(--surface); color: var(--body); font-family: var(--font); font-size: 13px; font-weight: 600; cursor: pointer; border-radius: 999px; padding: 7px 13px; }
+.tag-chip::before { content: "#"; opacity: .5; margin-right: 1px; }
+.tag-chip.is-on { border-color: var(--primary); background: var(--tint); color: var(--primary); }
+
+/* header */
+#app-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+#app-header .bar { height: 66px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-size: 21px; font-weight: 800; letter-spacing: -0.03em; color: var(--ink-deep); }
+.logo span { color: var(--point); }
+.nav-links { display: flex; gap: 22px; align-items: center; }
+.nav-links a { color: var(--body); text-decoration: none; font-size: 14px; font-weight: 600; }
+.nav-links a:hover { color: var(--primary); }
+.nav-cta { display: flex; gap: 10px; align-items: center; }
+.nav-cta .btn { height: 40px; font-size: 14px; padding: 0 16px; border-radius: 12px; }
+.nav-cta .btn-primary { box-shadow: none; }
+.header-tag { font-family: var(--mono); font-size: 11px; color: var(--primary); background: var(--tint); text-align: center; padding: 3px 0; }
+
+/* hero */
+#hero { background: linear-gradient(180deg, #eaf5f1 0%, var(--surface) 100%); }
+.hero-inner { display: grid; grid-template-columns: 1.05fr .95fr; gap: 36px; align-items: center; }
+.hero-text h1 { font-size: clamp(28px, 5vw, 46px); font-weight: 800; margin-bottom: 18px; letter-spacing: -0.03em; }
+.hero-text h1 .hl { color: var(--point); }
+.hero-text .lead { font-size: clamp(15px, 2.2vw, 18px); }
+
+/* hero 달력 */
+.hero-cal { padding: 20px; }
+.cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.cal-title { font-size: 16px; font-weight: 800; color: var(--ink-deep); }
+.cal-nav { width: 32px; height: 32px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-size: 18px; color: var(--body); }
+.cal-nav:hover { background: var(--tint2); }
+.cal-status { font-size: 12.5px; color: var(--body); background: var(--tint2); border-radius: 10px; padding: 9px 11px; margin-bottom: 12px; }
+.cal-status b { color: var(--point); font-weight: 800; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.cal-dow { text-align: center; font-size: 11px; font-weight: 700; color: var(--muted); padding-bottom: 4px; }
+.cal-cell { position: relative; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 600; color: var(--ink-strong); border-radius: 9px; }
+.cal-cell.empty { visibility: hidden; }
+.cal-cell.today { background: var(--primary); color: #fff; font-weight: 800; }
+.cal-cell.has { cursor: pointer; }
+.cal-cell.has:not(.today) { background: var(--point-soft); color: var(--point-deep); font-weight: 800; }
+.cal-dot { position: absolute; bottom: 4px; width: 5px; height: 5px; border-radius: 50%; background: var(--point); }
+.cal-cell.today .cal-dot { background: #fff; }
+.cal-legend { display: flex; gap: 16px; margin-top: 12px; font-size: 12px; color: var(--muted); }
+.cal-legend i.lg { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: middle; }
+.cal-legend i.today { background: var(--primary); }
+.cal-legend i.due { background: var(--point); }
+
+/* feature flow */
+.flow-lead { color: var(--body); font-size: 15px; margin-bottom: 8px; }
+.flow { display: flex; align-items: stretch; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+.flow-step { flex: 1; min-width: 130px; text-decoration: none; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 2px; transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease; }
+.flow-step:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+.flow-step .fs-num { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--point); }
+.flow-step .fs-name { font-size: 14.5px; font-weight: 800; color: var(--ink-deep); }
+.flow-step .fs-desc { font-size: 12px; color: var(--muted); }
+.flow-arrow { display: flex; align-items: center; color: var(--muted-light); font-size: 18px; }
+
+/* dashboard */
+.dash-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; margin-top: 28px; }
+.dash-side { display: flex; flex-direction: column; gap: 20px; }
+/* 역량 현황 포인트 강조 */
+.dash-monitor { border: 1.5px solid var(--point); background: linear-gradient(180deg, #fff 0%, var(--point-soft) 140%); }
+.dash-monitor .pt-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--point); margin-right: 8px; vertical-align: middle; }
+.monitor-body { display: grid; grid-template-columns: 260px 1fr; gap: 20px; align-items: center; }
+.spider-wrap { display: flex; align-items: center; justify-content: center; }
+.spider { width: 100%; max-width: 260px; height: auto; overflow: visible; }
+.spider-grid { fill: none; stroke: var(--border); stroke-width: 1; }
+.spider-axis { stroke: var(--border); stroke-width: 1; }
+.spider-data { fill: rgba(255,106,61,0.16); stroke: var(--point); stroke-width: 2; }
+.spider-label { font-family: var(--font); font-size: 11px; font-weight: 700; fill: var(--ink-strong); }
+.comp-bars { display: flex; flex-direction: column; gap: 11px; }
+.comp-bar-row { display: grid; grid-template-columns: 66px 1fr 28px; align-items: center; gap: 10px; font-size: 13px; }
+.comp-bar-row .cb-name { font-weight: 700; color: var(--ink-strong); }
+.comp-bar-track { height: 9px; background: #fff; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
+.comp-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--point)); border-radius: 999px; }
+.comp-bar-row .cb-val { text-align: right; color: var(--point-deep); font-weight: 800; }
+
+.nudge-list, .dday-list { display: flex; flex-direction: column; gap: 10px; }
+.nudge { display: flex; gap: 10px; align-items: flex-start; background: var(--tint2); border: 1px solid var(--border); border-radius: 14px; padding: 13px 14px; }
+.nudge .n-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--point); margin-top: 7px; flex: none; }
+.nudge .n-body { font-size: 13.5px; color: var(--ink-strong); line-height: 1.5; }
+.nudge .n-body b { color: var(--primary); }
+.nudge .n-act { margin-top: 8px; }
+.dday { display: flex; align-items: center; gap: 12px; border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; cursor: pointer; }
+.dday:hover { border-color: var(--point); background: var(--point-soft); }
+.dday .dd-badge { font-weight: 800; font-size: 13px; color: #fff; border-radius: 10px; padding: 6px 10px; min-width: 52px; text-align: center; background: var(--primary); }
+.dday .dd-badge.soon { background: var(--point); }
+.dday .dd-badge.over { background: var(--muted); }
+.dday .dd-info { font-size: 13px; overflow: hidden; }
+.dday .dd-company { font-weight: 700; color: var(--ink-deep); }
+.dday .dd-q { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* 2분할 */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; align-items: start; }
+.split-head { font-size: 14px; font-weight: 700; color: var(--ink-deep); margin-bottom: 12px; display: flex; gap: 8px; align-items: baseline; }
+.split-right { position: sticky; top: 82px; }
+
+.archive-toolbar { display: flex; justify-content: flex-end; margin-bottom: 12px; }
+.view-toggle { display: inline-flex; background: var(--screen); border: 1px solid var(--border); border-radius: 999px; padding: 4px; }
+.vt-btn { border: none; background: transparent; cursor: pointer; font-family: var(--font); font-size: 13px; font-weight: 700; color: var(--muted); padding: 7px 15px; border-radius: 999px; }
+.vt-btn.is-active { background: #fff; color: var(--primary); box-shadow: var(--shadow-sm); }
+
+/* 타임라인 카드 */
+.timeline { display: flex; flex-direction: column; gap: 12px; }
+.tl-group-head { font-size: 13px; font-weight: 800; color: var(--point-deep); margin: 8px 0 2px; padding-left: 2px; }
+.tl-card { position: relative; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--primary); border-radius: 14px; padding: 15px 16px 15px 15px; cursor: pointer; transition: transform .1s ease, box-shadow .1s ease, border-color .1s ease; }
+.tl-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.tl-card.is-selected { box-shadow: 0 0 0 2px var(--tint); }
+.tl-body { display: flex; gap: 12px; }
+.tl-ico { width: 38px; height: 38px; border-radius: 11px; flex: none; display: flex; align-items: center; justify-content: center; color: #fff; }
+.tl-ico svg { width: 20px; height: 20px; }
+.tl-main { flex: 1; min-width: 0; }
+.tl-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.tl-cat { font-size: 11px; font-weight: 700; color: #fff; border-radius: 7px; padding: 2px 8px; }
+.tl-state { font-size: 11px; font-weight: 700; }
+.tl-state.done { color: var(--success); }
+.tl-state.todo { color: var(--muted); }
+.tl-title { font-size: 15px; font-weight: 700; color: var(--ink-deep); margin: 7px 0 3px; }
+.tl-meta { font-size: 12px; color: var(--muted); }
+.tl-summary { font-size: 13px; color: var(--body); margin-top: 6px; line-height: 1.5; }
+.tl-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.mini-tag { font-size: 11px; font-weight: 600; color: var(--primary); background: var(--tint); border-radius: 999px; padding: 2px 8px; }
+.mini-tag::before { content: "#"; opacity: .5; }
+.tl-card.rec { border-color: var(--point); box-shadow: 0 0 0 1px var(--point-soft); }
+.tl-card .rec-badge { position: absolute; top: 12px; right: 12px; font-size: 11px; font-weight: 800; color: #fff; background: var(--point); border-radius: 999px; padding: 2px 9px; display: none; }
+.tl-card.rec .rec-badge { display: inline-block; }
+.tl-card[draggable="true"] { cursor: grab; }
+.tl-card.dragging { opacity: .5; }
+
+/* STAR 빌더 */
+.star-builder { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--shadow-sm); }
+.star-empty { color: var(--muted); text-align: center; padding: 40px 16px; font-size: 14px; }
+.star-empty .se-icon { font-size: 30px; display: block; margin-bottom: 10px; }
+.sb-title { font-size: 18px; font-weight: 800; color: var(--ink-deep); }
+.sb-meta { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+.star-example { background: var(--point-soft); border: 1px dashed var(--point); border-radius: 12px; padding: 12px 13px; margin-bottom: 16px; font-size: 12.5px; color: var(--point-deep); line-height: 1.55; }
+.star-example .se-t { font-weight: 800; margin-bottom: 5px; display: block; }
+.star-example .se-line { color: var(--ink-strong); }
+.star-example .btn { margin-top: 10px; }
+.star-field { margin-bottom: 14px; }
+.star-field label { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+.star-badge { width: 22px; height: 22px; border-radius: 7px; color: #fff; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; }
+.star-badge.s { background: var(--primary); }
+.star-badge.t { background: var(--secondary); }
+.star-badge.a { background: var(--point); }
+.star-badge.r { background: var(--success); }
+.star-guide { font-size: 12px; color: var(--primary); background: var(--tint); border-radius: 10px; padding: 8px 11px; margin-top: 7px; line-height: 1.5; }
+.sb-foot { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
+.sb-foot .spacer { flex: 1; }
+
+/* ai-workshop */
+.notice { margin-top: 18px; background: var(--warning-bg); border: 1px solid #f4dfa0; border-radius: 12px; padding: 13px 15px; font-size: 13px; color: #92600a; }
+.workshop-output { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.ws-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 10px; }
+.ws-card .ws-label { font-size: 11px; font-weight: 800; color: var(--primary); background: var(--tint); border-radius: 999px; padding: 3px 10px; align-self: flex-start; }
+.ws-card .ws-text { font-size: 14px; color: var(--ink-strong); line-height: 1.6; flex: 1; }
+.ws-card .btn { align-self: flex-start; }
+
+/* company-research */
+.app-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.app-tab { border: 1.5px solid var(--border); background: var(--surface); color: var(--body); font-family: var(--font); font-size: 13px; font-weight: 700; cursor: pointer; border-radius: 12px; padding: 9px 14px; }
+.app-tab.is-active { border-color: var(--point); background: var(--point-soft); color: var(--point-deep); }
+.app-tab .at-sub { font-weight: 500; color: var(--muted); margin-left: 6px; }
+
+.research-body { margin-top: 20px; }
+.rs-group { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.rs-group > h4 { display: flex; align-items: center; gap: 9px; font-size: 15px; margin-bottom: 4px; }
+.rs-group .rs-num { width: 24px; height: 24px; border-radius: 8px; background: var(--primary); color: #fff; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; }
+.rs-group .rs-help { font-size: 12.5px; color: var(--muted); margin-bottom: 16px; }
+.rs-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.rs-fields .field-wide { grid-column: 1 / -1; }
+.rs-match { margin-top: 4px; font-size: 12.5px; color: var(--point-deep); background: var(--point-soft); border-radius: 10px; padding: 10px 12px; line-height: 1.6; }
+.rs-match b { font-weight: 800; }
+.rs-save-row { display: flex; justify-content: flex-end; margin-top: 4px; }
+
+/* application-canvas */
+.wordbank { margin-top: 20px; background: var(--tint2); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+.wordbank .wb-title { font-size: 13px; font-weight: 800; color: var(--ink-deep); margin-bottom: 10px; }
+.wordbank .wb-title .hint { font-weight: 500; }
+.wordbank .wb-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.wb-chip { border: 1.5px solid var(--secondary); background: #fff; color: var(--primary-deep); font-family: var(--font); font-size: 13px; font-weight: 700; cursor: pointer; border-radius: 999px; padding: 6px 12px; }
+.wb-chip:hover { background: var(--tint); }
+
+.split-right-wide { min-width: 0; }
+.canvas-questions { display: flex; flex-direction: column; gap: 16px; }
+.cq-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow-sm); }
+.cq-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.cq-q { font-size: 14px; font-weight: 700; color: var(--ink-deep); line-height: 1.5; }
+.cq-rec { font-size: 12px; color: var(--point-deep); font-weight: 700; margin: 6px 0 10px; }
+.cq-answer { min-height: 150px; }
+.cq-answer.dropping { border-color: var(--point); background: var(--point-soft); box-shadow: 0 0 0 3px rgba(255,106,61,0.15); }
+.cq-bar { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.cq-count { font-size: 13px; font-weight: 700; color: var(--muted); margin-right: auto; }
+.cq-count.over { color: var(--point); }
+
+/* footer */
+#app-footer { background: var(--ink-deep); color: var(--muted-light); padding: 58px 0 40px; }
+#app-footer .footer-tag { font-family: var(--mono); font-size: 12px; color: #bfe3da; background: rgba(255,255,255,0.08); display: inline-block; border-radius: 999px; padding: 4px 12px; margin-bottom: 24px; }
+#app-footer .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }
+#app-footer .logo { color: #fff; }
+#app-footer .logo span { color: var(--point); }
+#app-footer .foot-desc { margin-top: 12px; font-size: 14px; color: var(--muted-light); max-width: 280px; line-height: 1.6; }
+#app-footer a { color: var(--muted-light); text-decoration: none; display: block; font-size: 14px; margin: 8px 0; }
+#app-footer a:hover { color: #fff; }
+#app-footer h4 { color: #fff; margin-bottom: 8px; }
+#app-footer .copyright { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 13px; color: #6f8a83; }
+
+/* 반응형 */
+@media (max-width: 1024px) {
+  .container { padding: 0 20px; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-cal { max-width: 420px; }
+  .monitor-body { grid-template-columns: 1fr; }
+  .spider-wrap { max-width: 300px; margin: 0 auto; }
+  .workshop-output { grid-template-columns: 1fr; }
+  #app-footer .foot-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+  .nav-links { display: none; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .dash-grid { grid-template-columns: 1fr; }
+  .split { grid-template-columns: 1fr; }
+  .split-right { position: static; }
+  .panel-exp, .panel-company, .panel-question, .workshop-input { grid-template-columns: 1fr; }
+  .rs-fields { grid-template-columns: 1fr; }
+  .flow { flex-direction: column; }
+  .flow-arrow { transform: rotate(90deg); align-self: center; }
+  #app-footer .foot-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  #app-header .bar { height: 58px; }
+  .logo { font-size: 19px; }
+  .nav-cta .btn-ghost { display: none; }
+  .card, .panel, .star-builder, .rs-group, .cq-card { padding: 18px; }
+  #app-footer .foot-grid { grid-template-columns: 1fr; gap: 24px; }
+  .btn-row { flex-direction: column; align-items: stretch; }
+  .btn-row .btn { width: 100%; }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================ app-header ============================================================ -->
+  <header id="app-header">
+    <div class="header-tag">#app-header — 전역 헤더 / 네비게이션</div>
+    <div class="container bar">
+      <div class="logo">경험정리<span>.</span></div>
+      <nav class="nav-links">
+        <a href="#dashboard">대시보드</a>
+        <a href="#experience-archive">경험 아카이브</a>
+        <a href="#ai-workshop">AI 워크숍</a>
+        <a href="#company-research">기업분석</a>
+        <a href="#application-canvas">자소서 빌더</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-ghost">로그인</a>
+        <a href="#dashboard" class="btn btn-primary">시작하기</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================ hero (제목 + 달력) ============================================================ -->
+    <section id="hero" data-section>
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <span class="section-tag">hero <span class="kr">· 히어로 / 핵심 메시지</span></span>
+          <h1>흩어진 경험이 모여,<br /><span class="hl">나의 길</span>이 됩니다.</h1>
+          <p class="lead">
+            프로젝트·대외활동·인턴 경험을 기록하고 STAR로 정리해, 자소서 문항에 딱 맞게 연결하세요.
+            오늘 쌓은 한 걸음이 내일의 합격으로 이어집니다.
+          </p>
+          <div class="btn-row">
+            <a href="#dashboard" class="btn btn-primary">회원가입 없이 시작하기</a>
+            <a href="#feature-overview" class="btn btn-ghost">기능 둘러보기</a>
+          </div>
+        </div>
+
+        <!-- 나의 채용 현황 달력 -->
+        <div class="hero-cal card">
+          <div class="cal-head">
+            <button class="cal-nav" id="cal-prev" type="button" aria-label="이전 달">‹</button>
+            <span class="cal-title" id="cal-title"></span>
+            <button class="cal-nav" id="cal-next" type="button" aria-label="다음 달">›</button>
+          </div>
+          <div class="cal-status" id="cal-status"></div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <div class="cal-legend"><span><i class="lg today"></i> 오늘</span><span><i class="lg due"></i> 자소서 마감</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ feature-overview (흐름형·클릭 이동) ============================================================ -->
+    <section id="feature-overview" data-section>
+      <div class="container">
+        <span class="section-tag">feature-overview <span class="kr">· 핵심 기능 개요</span></span>
+        <p class="flow-lead">경험 기록 → 정리 → 분석 → 자소서까지, 이렇게 이어집니다. <span class="hint">카드를 누르면 해당 화면으로 이동해요.</span></p>
+        <div class="flow">
+          <a href="#dashboard" class="flow-step"><span class="fs-num">01</span><span class="fs-name">대시보드</span><span class="fs-desc">역량 현황</span></a>
+          <span class="flow-arrow">→</span>
+          <a href="#experience-archive" class="flow-step"><span class="fs-num">02</span><span class="fs-name">경험 아카이브</span><span class="fs-desc">타임라인·STAR</span></a>
+          <span class="flow-arrow">→</span>
+          <a href="#ai-workshop" class="flow-step"><span class="fs-num">03</span><span class="fs-name">AI 워크숍</span><span class="fs-desc">문장 재구성</span></a>
+          <span class="flow-arrow">→</span>
+          <a href="#company-research" class="flow-step"><span class="fs-num">04</span><span class="fs-name">기업분석</span><span class="fs-desc">직무·KPI</span></a>
+          <span class="flow-arrow">→</span>
+          <a href="#application-canvas" class="flow-step"><span class="fs-num">05</span><span class="fs-name">자소서 빌더</span><span class="fs-desc">경험 연결</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ dashboard ============================================================ -->
+    <section id="dashboard" data-section>
+      <div class="container">
+        <span class="section-tag">dashboard <span class="kr">· 대시보드</span></span>
+        <h2 id="dash-greeting">반가워요! 이번 주도 한 걸음 나아갔어요</h2>
+        <p class="lead">기록한 경험을 기반으로 쌓인 역량과, 지금 챙겨야 할 일들을 모아 보여드려요.</p>
+
+        <div class="dash-grid">
+          <!-- 나의 역량 현황 (포인트 강조) -->
+          <div class="card dash-monitor">
+            <div class="card-head"><h3><i class="pt-dot"></i>나의 역량 현황</h3><span class="hint">기록한 경험 태그 기반</span></div>
+            <div class="monitor-body">
+              <div id="spider-chart" class="spider-wrap"></div>
+              <div id="competency-bars" class="comp-bars"></div>
+            </div>
+          </div>
+
+          <div class="dash-side">
+            <div class="card">
+              <div class="card-head"><h3>리마인드 넛지</h3></div>
+              <div id="nudge-list" class="nudge-list"></div>
+            </div>
+            <div class="card">
+              <div class="card-head"><h3>자소서 바로가기</h3></div>
+              <div id="dday-list" class="dday-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ experience-archive ============================================================ -->
+    <section id="experience-archive" data-section>
+      <div class="container">
+        <span class="section-tag">experience-archive <span class="kr">· 경험 아카이브 / 탄약고</span></span>
+        <h2>경험 아카이브 — 자소서 소스가 되는 나의 탄약고</h2>
+        <p class="lead">경험을 기록하면 타임라인으로 쌓입니다. 카드를 클릭해 오른쪽에서 STAR로 정리하세요.</p>
+
+        <form id="exp-add-form" class="panel panel-exp">
+          <div class="field">
+            <label>제목</label>
+            <input id="exp-title" type="text" placeholder="예: 종합설계 캡스톤 프로젝트" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label>카테고리</label>
+            <select id="exp-category">
+              <option value="프로젝트">프로젝트</option>
+              <option value="인턴">인턴</option>
+              <option value="대외활동">대외활동</option>
+              <option value="공모전">공모전</option>
+              <option value="동아리">동아리</option>
+              <option value="학생회">학생회</option>
+              <option value="아르바이트">아르바이트</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>기간</label>
+            <input id="exp-period" type="text" placeholder="예: 2025.03–06" autocomplete="off" />
+          </div>
+          <div class="field field-wide">
+            <label>한 줄 요약</label>
+            <input id="exp-summary" type="text" placeholder="예: IoT 팀 프로젝트에서 데이터 파이프라인 구축" autocomplete="off" />
+          </div>
+          <div class="field field-wide">
+            <label>역량 태그 <span class="hint">최대 3개 선택</span></label>
+            <div id="exp-tag-picker" class="tag-picker"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">경험 추가</button>
+        </form>
+
+        <div class="split">
+          <div class="split-left">
+            <div class="archive-toolbar">
+              <div class="view-toggle" id="view-toggle">
+                <button class="vt-btn is-active" data-view="list" type="button">전체</button>
+                <button class="vt-btn" data-view="period" type="button">기간별</button>
+              </div>
+            </div>
+            <div class="tag-filter" id="tag-filter"></div>
+            <div id="timeline-feed" class="timeline"></div>
+          </div>
+          <aside class="split-right">
+            <div id="star-builder" class="star-builder"></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ ai-workshop (변경 없음) ============================================================ -->
+    <section id="ai-workshop" data-section>
+      <div class="container">
+        <span class="section-tag">ai-workshop <span class="kr">· AI 문장 재구성터</span></span>
+        <h2>AI 문장 재구성터 — 대학생 표현을 실무자 언어로</h2>
+        <p class="lead">투박한 초안을 넣으면 직무에 맞춰 다듬은 3가지 버전을 추천해 드려요.</p>
+        <div class="notice">키워드/템플릿 기반 <b>데모</b>입니다. LLM API 연동 시 실제 문장 변환으로 교체됩니다.</div>
+
+        <div class="panel workshop-input">
+          <div class="field field-wide">
+            <label>원문 <span class="hint">대학생식 표현 그대로 편하게</span></label>
+            <textarea id="ws-input" rows="3" placeholder="예: 조원들과 친해져서 열심히 피드백을 주고받았습니다."></textarea>
+          </div>
+          <div class="field">
+            <label>목표 직무</label>
+            <select id="ws-job">
+              <option value="tech">기술 / 엔지니어링</option>
+              <option value="pm">기획 / 사업관리</option>
+              <option value="mkt">마케팅</option>
+              <option value="design">디자인</option>
+              <option value="general">일반</option>
+            </select>
+          </div>
+          <button id="ws-run" type="button" class="btn btn-primary">문장 변환</button>
+        </div>
+        <div id="workshop-output" class="workshop-output"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ company-research (기업분석/직무분석) ============================================================ -->
+    <section id="company-research" data-section>
+      <div class="container">
+        <span class="section-tag">company-research <span class="kr">· 기업분석 / 직무분석</span></span>
+        <h2>기업분석 — 자소서의 방향타를 세우기</h2>
+        <p class="lead">지원 기업의 DNA·사업/시장/재무·직무 KPI·이슈를 정리해 두면, 자소서 문항과 경험 매칭의 기준이 됩니다.</p>
+
+        <!-- 기업 추가 -->
+        <form id="company-add-form" class="panel panel-company">
+          <div class="field"><label>기업명</label><input id="co-name" type="text" placeholder="예: OO전자" autocomplete="off" /></div>
+          <div class="field"><label>직무</label>
+            <select id="co-job">
+              <option value="tech">기술 / 엔지니어링</option>
+              <option value="pm">기획 / 사업관리</option>
+              <option value="mkt">마케팅</option>
+              <option value="design">디자인</option>
+              <option value="general">일반</option>
+            </select>
+          </div>
+          <div class="field"><label>마감일 <span class="hint">YYYY-MM-DD</span></label><input id="co-deadline" type="text" placeholder="2026-07-15" autocomplete="off" /></div>
+          <div class="field"><label>기본 글자 수</label><input id="co-limit" type="text" inputmode="numeric" placeholder="1000" autocomplete="off" /></div>
+          <button type="submit" class="btn btn-primary">기업 추가</button>
+        </form>
+
+        <!-- 기업 선택 탭 -->
+        <div id="research-tabs" class="app-tabs"></div>
+
+        <!-- 분석 입력 폼 -->
+        <div id="research-body"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ application-canvas (자소서 빌더) ============================================================ -->
+    <section id="application-canvas" data-section>
+      <div class="container">
+        <span class="section-tag">application-canvas <span class="kr">· 자소서 빌더</span></span>
+        <h2>자소서 빌더 — 경험을 문항에 배치하기</h2>
+        <p class="lead">기업별 문항에 답을 쓰되, 왼쪽 경험 카드를 답변 칸으로 드래그하면 STAR 초안이 채워집니다.</p>
+
+        <!-- 기업 선택 탭 (기업분석과 공유) -->
+        <div id="canvas-tabs" class="app-tabs"></div>
+
+        <!-- 문항 추가 -->
+        <form id="question-add-form" class="panel panel-question">
+          <div class="field field-wide"><label>자소서 문항</label>
+            <textarea id="q-text" rows="2" placeholder="예: 공동의 목표를 달성하기 위해 노력했던 경험을 기술하시오."></textarea>
+          </div>
+          <div class="field"><label>글자 수 제한</label><input id="q-limit" type="text" inputmode="numeric" placeholder="비우면 기본값" autocomplete="off" /></div>
+          <button type="submit" class="btn btn-primary">문항 추가</button>
+        </form>
+
+        <!-- KPI 단어장 -->
+        <div id="kpi-wordbank" class="wordbank"></div>
+
+        <!-- 2분할: 좌 경험 / 우 문항+답변 -->
+        <div class="split">
+          <div class="split-left">
+            <div class="split-head">내 경험 <span class="hint">드래그해서 답변 칸에 넣기</span></div>
+            <div id="canvas-exp-list" class="timeline"></div>
+          </div>
+          <div class="split-right-wide">
+            <div id="canvas-questions" class="canvas-questions"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================ footer ============================================================ -->
+  <footer id="app-footer">
+    <div class="container">
+      <span class="footer-tag">#app-footer — 전역 푸터</span>
+      <div class="foot-grid">
+        <div>
+          <div class="logo">경험정리<span>.</span></div>
+          <p class="foot-desc">흩어진 경험이 모여, 나의 길이 됩니다. 대학생·취준생을 위한 경험정리 앱.</p>
+        </div>
+        <div>
+          <h4>기능</h4>
+          <a href="#dashboard">대시보드</a>
+          <a href="#experience-archive">경험 아카이브</a>
+          <a href="#ai-workshop">AI 워크숍</a>
+          <a href="#company-research">기업분석</a>
+          <a href="#application-canvas">자소서 빌더</a>
+        </div>
+        <div>
+          <h4>정보</h4>
+          <a href="#feature-overview">기능 소개</a>
+          <a href="#hero">서비스 소개</a>
+        </div>
+        <div>
+          <h4>정책</h4>
+          <a href="#">개인정보 처리방침</a>
+          <a href="#">이용약관</a>
+        </div>
+      </div>
+      <div class="copyright">© 2026 경험정리. 프로토타입 — 데이터는 브라우저에만 저장됩니다.</div>
+    </div>
+  </footer>
+
+  <script>
+/* =========================================================
+   경험정리 · app.js  (프로토타입 · 클라이언트 전용 · localStorage)
+   섹션: hero달력 · 대시보드 · 경험아카이브 · AI워크숍 · 기업분석 · 자소서빌더
+   ※ AI 파트는 데모(키워드/템플릿). transform/match 함수만 LLM 호출로 교체 가능.
+   ========================================================= */
+(function () {
+  "use strict";
+
+  /* ---------- 유틸 ---------- */
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const uid = () => Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36);
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+
+  const KEYS = { exp: "exp3.experiences", comp: "exp3.companies", seeded: "exp3.seeded" };
+  const load = (k, fb) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? fb : v; } catch { return fb; } };
+  const save = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+  const store = { experiences: load(KEYS.exp, []), companies: load(KEYS.comp, []) };
+  const persist = () => { save(KEYS.exp, store.experiences); save(KEYS.comp, store.companies); };
+
+  const COMPETENCIES = ["문제해결", "협업", "데이터분석", "소통", "리더십", "기획"];
+  const JOB_LABEL = { tech: "기술/엔지니어링", pm: "기획/사업관리", mkt: "마케팅", design: "디자인", general: "일반" };
+  const isOrganized = (e) => !!(e.star && e.star.s && e.star.t && e.star.a && e.star.r);
+  const catColor = (c) => `var(--cat-${c}, var(--primary))`;
+
+  /* ---------- 카테고리 아이콘 (인라인 SVG) ---------- */
+  const SVG = (inner) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+  const CATEGORY_ICON = {
+    "프로젝트": SVG('<path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/>'),
+    "인턴": SVG('<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>'),
+    "대외활동": SVG('<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/>'),
+    "공모전": SVG('<circle cx="12" cy="8" r="6"/><path d="M8.2 13.9 7 23l5-3 5 3-1.2-9.1"/>'),
+    "동아리": SVG('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/>'),
+    "학생회": SVG('<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>'),
+    "아르바이트": SVG('<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>'),
+  };
+  const iconFor = (c) => CATEGORY_ICON[c] || SVG('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>');
+
+  /* ---------- 카테고리별 STAR 예시 ---------- */
+  const STAR_EXAMPLE = {
+    "프로젝트": { s: "3인 팀 캡스톤 프로젝트에서 백엔드를 맡음", t: "출시 2주 전 API 응답 지연 해결 필요", a: "쿼리 인덱싱·캐싱 도입, 부하 테스트 진행", r: "응답 속도 40% 개선, 기한 내 출시" },
+    "인턴": { s: "마케팅팀 인턴으로 합류", t: "SNS 채널 참여율 개선 필요", a: "콘텐츠 캘린더 도입·주간 리뷰 운영", r: "3개월 만에 참여율 30% 상승" },
+    "대외활동": { s: "글로벌 서포터즈로 활동", t: "행사 참여율 저조 문제", a: "타깃별 홍보 채널 재설계", r: "참여 인원 2배 증가" },
+    "공모전": { s: "데이터 분석 공모전 참가", t: "교통 혼잡 예측 모델 필요", a: "회귀 모델 구축·변수 튜닝", r: "정확도 85% 달성, 우수상 수상" },
+    "동아리": { s: "5인 창업 동아리 팀장", t: "아이디어 실행 속도 저하", a: "역할 분담·주간 스프린트 도입", r: "3개월 내 MVP 완성" },
+    "학생회": { s: "학과 학생회 기획부원", t: "신입생 행사 만족도 개선", a: "설문 기반 프로그램 재설계", r: "만족도 4.2→4.7 상승" },
+    "아르바이트": { s: "카페 매니저 보조 근무", t: "피크타임 대기 시간 과다", a: "주문 동선·업무 순서 표준화", r: "평균 대기 시간 25% 단축" },
+  };
+  const exampleFor = (c) => STAR_EXAMPLE[c] || { s: "어떤 상황이었는지", t: "무엇을 해내야 했는지", a: "구체적으로 어떻게 행동했는지", r: "정량적 결과(예: __% 개선)" };
+
+  /* ========================================================= 시드 ========================================================= */
+  function seedIfEmpty() {
+    if (localStorage.getItem(KEYS.seeded)) return;
+    store.experiences = [
+      { id: uid(), title: "OO기업 하계 인턴", category: "인턴", period: "2025.07–08", summary: "마케팅팀 SNS 채널 운영 개선", tags: ["협업", "기획", "데이터분석"],
+        star: { s: "마케팅팀 인턴으로 합류", t: "SNS 채널 참여율 개선 필요", a: "콘텐츠 캘린더 도입, 주간 리뷰 운영", r: "3개월 만에 참여율 30% 상승" } },
+      { id: uid(), title: "데이터 분석 공모전 우수상", category: "공모전", period: "2024.11", summary: "공공데이터로 교통 혼잡 예측", tags: ["데이터분석", "문제해결"],
+        star: { s: "공공데이터 활용 공모전 참가", t: "출근길 교통 혼잡 예측 모델 필요", a: "회귀 모델 구축 및 변수 튜닝", r: "예측 정확도 85% 달성, 우수상 수상" } },
+      { id: uid(), title: "종합설계 캡스톤 프로젝트", category: "프로젝트", period: "2025.03–06", summary: "IoT 팀 프로젝트, 데이터 파이프라인 담당", tags: ["문제해결", "협업"], star: { s: "", t: "", a: "", r: "" } },
+      { id: uid(), title: "교내 창업 동아리 팀장", category: "동아리", period: "2024", summary: "5인 팀 리딩 및 아이디어 기획", tags: ["리더십", "기획"], star: { s: "", t: "", a: "", r: "" } },
+    ];
+    store.companies = [
+      { id: uid(), name: "OO전자", job: "pm", deadline: "2026-07-10", limit: "1000",
+        research: { mission: "기술로 더 나은 일상을", values: "도전, 소통, 전문성", bm: "프리미엄 가전·반도체로 B2C·B2B 매출 창출", market: "국내 1위·글로벌 3위 / 경쟁사 대비 R&D 강점", finance: "흑자 지속, 최근 AI가전·반도체 R&D에 집중 투자", jd: "제품 기획: 시장조사·로드맵 수립·유관부서 협업", kpi: "출시 일정 준수율, 시장 점유율, 신제품 매출 기여", skills: "데이터 분석, 시장조사, 정보처리기사", news: "AI 가전 신규 라인업 발표, 유럽 시장 MOU 체결", trend: "ESG 경영·온디바이스 AI 확대" },
+        questions: [
+          { id: uid(), text: "공동의 목표를 달성하기 위해 노력했던 경험을 기술하시오.", answer: "", limit: "1000" },
+          { id: uid(), text: "지원 동기와 입사 후 포부를 서술하시오.", answer: "", limit: "800" },
+        ] },
+      { id: uid(), name: "△△은행", job: "general", deadline: "2026-07-05", limit: "500",
+        research: { mission: "", values: "신뢰, 전문성", bm: "", market: "", finance: "", jd: "", kpi: "고객 만족도, 상품 판매 실적", skills: "", news: "", trend: "디지털 전환 추진" },
+        questions: [ { id: uid(), text: "본인의 직무 역량과 강점을 서술하시오.", answer: "", limit: "500" } ] },
+    ];
+    persist();
+    localStorage.setItem(KEYS.seeded, "1");
+  }
+
+  /* ========================================================= 공용: D-Day ========================================================= */
+  function ddayInfo(deadline) {
+    if (!deadline) return null;
+    const d = new Date(deadline + "T00:00:00");
+    if (isNaN(d.getTime())) return null;
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const diff = Math.round((d - today) / 86400000);
+    return { diff, label: diff === 0 ? "D-DAY" : diff > 0 ? "D-" + diff : "D+" + Math.abs(diff), cls: diff < 0 ? "over" : diff <= 3 ? "soon" : "" };
+  }
+
+  /* ========================================================= 히어로 달력 ========================================================= */
+  let calRef = null;
+  function renderCalendar() {
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    if (!calRef) calRef = { y: today.getFullYear(), m: today.getMonth() };
+    const { y, m } = calRef;
+    const startDow = new Date(y, m, 1).getDay();
+    const days = new Date(y, m + 1, 0).getDate();
+
+    const marks = {};
+    store.companies.forEach((c) => {
+      if (!c.deadline) return;
+      const d = new Date(c.deadline + "T00:00:00");
+      if (!isNaN(d.getTime()) && d.getFullYear() === y && d.getMonth() === m) (marks[d.getDate()] = marks[d.getDate()] || []).push(c);
+    });
+
+    $("#cal-title").textContent = `${y}년 ${m + 1}월`;
+    let cells = ["일", "월", "화", "수", "목", "금", "토"].map((w) => `<span class="cal-dow">${w}</span>`).join("");
+    for (let i = 0; i < startDow; i++) cells += `<span class="cal-cell empty"></span>`;
+    for (let d = 1; d <= days; d++) {
+      const isToday = new Date(y, m, d).getTime() === today.getTime();
+      const has = marks[d];
+      cells += `<span class="cal-cell${isToday ? " today" : ""}${has ? " has" : ""}"${has ? ` data-day="${d}"` : ""}>${d}${has ? '<i class="cal-dot"></i>' : ""}</span>`;
+    }
+    $("#cal-grid").innerHTML = cells;
+
+    const upcoming = store.companies.map((c) => ({ c, dd: ddayInfo(c.deadline) })).filter((x) => x.dd).sort((a, b) => a.dd.diff - b.dd.diff);
+    const next = upcoming.find((x) => x.dd.diff >= 0) || upcoming[0];
+    $("#cal-status").innerHTML = `준비 중인 지원 <b>${store.companies.length}</b>곳` + (next ? ` · 가장 가까운 마감 <b>${esc(next.c.name)} ${next.dd.label}</b>` : " · 등록된 마감 없음");
+
+    $$("#cal-grid [data-day]").forEach((el) => el.addEventListener("click", () => {
+      const c = marks[el.dataset.day][0];
+      setActiveCompany(c.id);
+      $("#application-canvas").scrollIntoView({ behavior: "smooth" });
+    }));
+  }
+  $("#cal-prev").addEventListener("click", () => { if (--calRef.m < 0) { calRef.m = 11; calRef.y--; } renderCalendar(); });
+  $("#cal-next").addEventListener("click", () => { if (++calRef.m > 11) { calRef.m = 0; calRef.y++; } renderCalendar(); });
+
+  /* ========================================================= 대시보드 ========================================================= */
+  function competencyCounts() {
+    const c = Object.fromEntries(COMPETENCIES.map((k) => [k, 0]));
+    store.experiences.forEach((e) => (e.tags || []).forEach((t) => { if (t in c) c[t]++; }));
+    return c;
+  }
+  function renderSpider() {
+    const counts = competencyCounts();
+    const max = Math.max(1, ...Object.values(counts));
+    const n = COMPETENCIES.length, cx = 130, cy = 130, R = 82;
+    const ang = (i) => (-90 + i * (360 / n)) * Math.PI / 180;
+    const pt = (i, r) => [cx + Math.cos(ang(i)) * R * r, cy + Math.sin(ang(i)) * R * r];
+    let grid = "";
+    [0.25, 0.5, 0.75, 1].forEach((r) => { grid += `<polygon points="${COMPETENCIES.map((_, i) => pt(i, r).map((v) => v.toFixed(1)).join(",")).join(" ")}" class="spider-grid"/>`; });
+    let axes = ""; COMPETENCIES.forEach((_, i) => { const [x, y] = pt(i, 1); axes += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" class="spider-axis"/>`; });
+    const data = COMPETENCIES.map((c, i) => pt(i, Math.max(0.06, counts[c] / max)).map((v) => v.toFixed(1)).join(",")).join(" ");
+    let labels = ""; COMPETENCIES.forEach((c, i) => { const [x, y] = pt(i, 1.24); labels += `<text x="${x.toFixed(1)}" y="${(y + 4).toFixed(1)}" class="spider-label" text-anchor="middle">${c}</text>`; });
+    $("#spider-chart").innerHTML = `<svg viewBox="0 0 260 260" class="spider">${grid}${axes}<polygon points="${data}" class="spider-data"/>${labels}</svg>`;
+    $("#competency-bars").innerHTML = COMPETENCIES.map((c) => {
+      const v = counts[c], w = Math.round((v / max) * 100);
+      return `<div class="comp-bar-row"><span class="cb-name">${c}</span><span class="comp-bar-track"><span class="comp-bar-fill" style="width:${w}%"></span></span><span class="cb-val">${v}</span></div>`;
+    }).join("");
+  }
+  function renderNudges() {
+    const box = $("#nudge-list");
+    const todo = store.experiences.filter((e) => !isOrganized(e));
+    if (!todo.length) { box.innerHTML = `<div class="nudge"><span class="n-dot"></span><div class="n-body">모든 경험을 STAR로 정리했어요. 정말 잘하고 있어요!</div></div>`; return; }
+    box.innerHTML = todo.slice(0, 3).map((e) =>
+      `<div class="nudge"><span class="n-dot"></span><div class="n-body"><b>${esc(e.title)}</b> 경험을 아직 STAR로 정리하지 않았어요. 잊기 전에 박제해 볼까요?<div class="n-act"><button class="btn btn-sm btn-point" data-nudge="${e.id}">STAR로 정리하기</button></div></div></div>`).join("");
+    $$("[data-nudge]", box).forEach((b) => b.addEventListener("click", () => { selectExperience(b.dataset.nudge); $("#experience-archive").scrollIntoView({ behavior: "smooth" }); }));
+  }
+  function renderDday() {
+    const box = $("#dday-list");
+    const items = store.companies.flatMap((c) => { const dd = ddayInfo(c.deadline); return dd ? [{ c, dd }] : []; }).sort((a, b) => a.dd.diff - b.dd.diff);
+    if (!items.length) { box.innerHTML = `<div class="empty-note">마감일이 있는 자소서가 없어요. 기업분석에서 기업과 마감일을 추가해 보세요.</div>`; return; }
+    box.innerHTML = items.map(({ c, dd }) =>
+      `<div class="dday" data-co="${c.id}"><span class="dd-badge ${dd.cls}">${dd.label}</span><div class="dd-info"><div class="dd-company">${esc(c.name)}</div><div class="dd-q">문항 ${c.questions.length}개 · ${JOB_LABEL[c.job] || ""}</div></div></div>`).join("");
+    $$("[data-co]", box).forEach((el) => el.addEventListener("click", () => { setActiveCompany(el.dataset.co); $("#application-canvas").scrollIntoView({ behavior: "smooth" }); }));
+  }
+  function renderDashboard() { renderSpider(); renderNudges(); renderDday(); }
+
+  /* ========================================================= 경험 아카이브 ========================================================= */
+  let selectedTags = [], activeFilter = null, selectedExpId = null, archiveView = "list";
+
+  function renderTagPicker() {
+    const box = $("#exp-tag-picker");
+    box.innerHTML = COMPETENCIES.map((t) => `<button type="button" class="tag-chip ${selectedTags.includes(t) ? "is-on" : ""}" data-tag="${t}">${t}</button>`).join("");
+    $$("[data-tag]", box).forEach((b) => b.addEventListener("click", () => {
+      const t = b.dataset.tag;
+      if (selectedTags.includes(t)) selectedTags = selectedTags.filter((x) => x !== t);
+      else if (selectedTags.length < 3) selectedTags.push(t);
+      renderTagPicker();
+    }));
+  }
+  function renderTagFilter() {
+    const box = $("#tag-filter");
+    const used = new Set(); store.experiences.forEach((e) => (e.tags || []).forEach((t) => used.add(t)));
+    const tags = COMPETENCIES.filter((t) => used.has(t));
+    box.innerHTML = `<button class="tag-chip ${activeFilter === null ? "is-on" : ""}" data-f="__all">전체</button>` + tags.map((t) => `<button class="tag-chip ${activeFilter === t ? "is-on" : ""}" data-f="${t}">${t}</button>`).join("");
+    $$("[data-f]", box).forEach((b) => b.addEventListener("click", () => { activeFilter = b.dataset.f === "__all" ? null : b.dataset.f; renderTimeline(); }));
+  }
+  function tlCardHTML(e, opts = {}) {
+    const done = isOrganized(e), color = catColor(e.category);
+    const tags = (e.tags || []).map((t) => `<span class="mini-tag">${esc(t)}</span>`).join("");
+    const cls = ["tl-card", opts.recommend ? "rec" : "", opts.selectable && e.id === selectedExpId ? "is-selected" : ""].filter(Boolean).join(" ");
+    return `<div class="${cls}"${opts.draggable ? ' draggable="true"' : ""} data-exp="${e.id}" style="border-left-color:${color}">
+      <span class="rec-badge">추천</span>
+      <div class="tl-body">
+        <span class="tl-ico" style="background:${color}">${iconFor(e.category)}</span>
+        <div class="tl-main">
+          <div class="tl-top"><span class="tl-cat" style="background:${color}">${esc(e.category || "")}</span><span class="tl-state ${done ? "done" : "todo"}">${done ? "STAR 완료" : "정리 필요"}</span></div>
+          <div class="tl-title">${esc(e.title)}</div>
+          <div class="tl-meta">${esc(e.period || "기간 미입력")}</div>
+          ${e.summary ? `<div class="tl-summary">${esc(e.summary)}</div>` : ""}
+          ${tags ? `<div class="tl-tags">${tags}</div>` : ""}
+        </div>
+      </div></div>`;
+  }
+  const yearOf = (p) => { const m = String(p || "").match(/\d{4}/); return m ? +m[0] : 0; };
+  function renderTimeline() {
+    renderTagFilter();
+    const feed = $("#timeline-feed");
+    let list = store.experiences.slice();
+    if (activeFilter) list = list.filter((e) => (e.tags || []).includes(activeFilter));
+    if (!list.length) { feed.innerHTML = `<div class="empty-note">${activeFilter ? "해당 태그의 경험이 없어요." : "아직 경험이 없어요. 위에서 첫 경험을 추가해 보세요."}</div>`; return; }
+
+    if (archiveView === "period") {
+      list.sort((a, b) => yearOf(b.period) - yearOf(a.period));
+      let html = "", curYear = null;
+      list.forEach((e) => {
+        const yr = yearOf(e.period) || "기간 미상";
+        if (yr !== curYear) { curYear = yr; html += `<div class="tl-group-head">${yr === "기간 미상" ? yr : yr + "년"}</div>`; }
+        html += tlCardHTML(e, { selectable: true });
+      });
+      feed.innerHTML = html;
+    } else {
+      feed.innerHTML = list.map((e) => tlCardHTML(e, { selectable: true })).join("");
+    }
+    $$("[data-exp]", feed).forEach((el) => el.addEventListener("click", () => selectExperience(el.dataset.exp)));
+  }
+  function selectExperience(id) { selectedExpId = id; renderTimeline(); renderStarBuilder(); }
+
+  function renderStarBuilder() {
+    const box = $("#star-builder");
+    const e = store.experiences.find((x) => x.id === selectedExpId);
+    if (!e) { box.innerHTML = `<div class="star-empty"><span class="se-icon">✎</span>왼쪽 타임라인에서 경험을 선택하면<br/>여기서 STAR로 정리할 수 있어요.</div>`; return; }
+    const st = e.star || (e.star = { s: "", t: "", a: "", r: "" });
+    const ex = exampleFor(e.category);
+    const showExample = !isOrganized(e);
+    const field = (k, badge, label, ph, guide) => `<div class="star-field"><label><span class="star-badge ${k}">${badge}</span>${label}</label><textarea data-star="${k}" rows="2" placeholder="${ph}">${esc(st[k] || "")}</textarea>${guide ? `<div class="star-guide">${guide}</div>` : ""}</div>`;
+    box.innerHTML = `
+      <div class="sb-title">${esc(e.title)}</div>
+      <div class="sb-meta">${esc(e.category || "")} · ${esc(e.period || "기간 미입력")}</div>
+      ${showExample ? `<div class="star-example"><span class="se-t">✨ ${esc(e.category || "")} 경험 STAR 예시</span>
+        <span class="se-line">S) ${esc(ex.s)} · T) ${esc(ex.t)} · A) ${esc(ex.a)} · R) ${esc(ex.r)}</span>
+        <div><button class="btn btn-sm btn-point" id="sb-fill">이 예시로 채우기</button></div></div>` : ""}
+      ${field("s", "S", "상황 (Situation)", "어떤 상황이었나요?")}
+      ${field("t", "T", "과제 (Task)", "무엇을 해내야 했나요?")}
+      ${field("a", "A", "행동 (Action)", "구체적으로 어떻게 행동했나요?")}
+      ${field("r", "R", "결과 (Result)", "어떤 결과·배움이 있었나요?", "숫자나 정량적 지표(예: 비용 10% 절감, 기간 2주 단축)를 포함해 보세요.")}
+      <div class="sb-foot"><button class="btn btn-danger btn-sm" id="sb-delete">삭제</button><div class="spacer"></div><button class="btn btn-primary" id="sb-save">저장</button></div>`;
+
+    if (showExample) $("#sb-fill").addEventListener("click", () => {
+      $$("[data-star]", box).forEach((ta) => { if (!ta.value.trim()) ta.value = ex[ta.dataset.star]; });
+    });
+    $("#sb-save").addEventListener("click", () => {
+      $$("[data-star]", box).forEach((ta) => { e.star[ta.dataset.star] = ta.value.trim(); });
+      persist(); renderTimeline(); renderStarBuilder(); renderDashboard(); renderCanvasExpList();
+      flash($("#sb-save"), "저장됨 ✓");
+    });
+    $("#sb-delete").addEventListener("click", () => {
+      if (!confirm("이 경험을 삭제할까요?")) return;
+      store.experiences = store.experiences.filter((x) => x.id !== e.id); selectedExpId = null; persist();
+      renderTimeline(); renderStarBuilder(); renderDashboard(); renderCanvasExpList();
+    });
+  }
+
+  $("#view-toggle").addEventListener("click", (ev) => {
+    const b = ev.target.closest(".vt-btn"); if (!b) return;
+    archiveView = b.dataset.view;
+    $$(".vt-btn", $("#view-toggle")).forEach((x) => x.classList.toggle("is-active", x === b));
+    renderTimeline();
+  });
+  $("#exp-add-form").addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const title = $("#exp-title").value.trim(); if (!title) return $("#exp-title").focus();
+    const e = { id: uid(), title, category: $("#exp-category").value, period: $("#exp-period").value.trim(), summary: $("#exp-summary").value.trim(), tags: selectedTags.slice(), star: { s: "", t: "", a: "", r: "" } };
+    store.experiences.unshift(e); persist();
+    ev.target.reset(); selectedTags = [];
+    renderTagPicker(); renderDashboard(); renderCanvasExpList(); selectExperience(e.id);
+    $("#star-builder").scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+
+  /* ========================================================= AI 워크숍 (그대로 · 데모) ========================================================= */
+  function transformSentence(text, job) {
+    const base = text.trim().replace(/[.。]\s*$/, "");
+    const focus = { tech: "기술적 문제 해결 관점에서", pm: "자원 관리와 성과 관점에서", mkt: "고객·성장 관점에서", design: "사용자 경험 관점에서", general: "직무 역량 관점에서" }[job] || "직무 역량 관점에서";
+    return [
+      { label: "실무자 톤 (프로세스 강조)", text: `${focus}, ${base ? base + "는 경험을 바탕으로 " : ""}팀 내 주기적인 피드백 프로세스를 구축하여 협업 시너지를 극대화했습니다.` },
+      { label: "성과 강조 (정량화 유도)", text: `${base || "해당 활동"}을 주도하며 명확한 목표를 설정하고 실행해, 정량적 성과(예: 지표 __% 개선)를 달성했습니다. ← 실제 수치로 채워 보세요.` },
+      { label: "간결 버전", text: `${base || "협업 경험"}을 통해 소통과 실행력을 입증했습니다.` },
+    ];
+  }
+  function renderWorkshop() {
+    const text = $("#ws-input").value, out = $("#workshop-output");
+    if (!text.trim()) { out.innerHTML = `<div class="empty-note">위에 초안을 입력하고 '문장 변환'을 눌러 보세요.</div>`; return; }
+    out.innerHTML = transformSentence(text, $("#ws-job").value).map((v, i) =>
+      `<div class="ws-card"><span class="ws-label">${esc(v.label)}</span><div class="ws-text" id="wsv-${i}">${esc(v.text)}</div><button class="btn btn-ghost btn-sm" data-copy="wsv-${i}">복사</button></div>`).join("");
+    $$("[data-copy]", out).forEach((b) => b.addEventListener("click", () => { navigator.clipboard && navigator.clipboard.writeText($("#" + b.dataset.copy).textContent); flash(b, "복사됨 ✓"); }));
+  }
+  $("#ws-run").addEventListener("click", renderWorkshop);
+
+  /* ========================================================= 기업/문항 공용 ========================================================= */
+  let activeCompanyId = null, lastAnswerEl = null;
+  const activeCompany = () => store.companies.find((c) => c.id === activeCompanyId);
+
+  const KW2COMP = [
+    { comp: "협업", kw: ["협업", "공동", "함께", "팀", "협력"] },
+    { comp: "문제해결", kw: ["문제", "해결", "개선", "트러블", "위기", "극복", "어려"] },
+    { comp: "데이터분석", kw: ["데이터", "분석", "지표", "수치", "통계"] },
+    { comp: "소통", kw: ["소통", "설득", "의견", "갈등", "고객"] },
+    { comp: "리더십", kw: ["리더", "주도", "이끌", "팀장", "책임"] },
+    { comp: "기획", kw: ["기획", "전략", "설계", "아이디어", "계획"] },
+  ];
+  const questionComps = (q) => KW2COMP.filter((r) => r.kw.some((k) => (q || "").includes(k))).map((r) => r.comp);
+
+  function companyTabsHTML(activeCls) {
+    if (!store.companies.length) return `<div class="empty-note">아직 등록한 기업이 없어요. 기업분석에서 기업을 추가해 보세요.</div>`;
+    if (!activeCompany()) activeCompanyId = store.companies[0].id;
+    return store.companies.map((c) => `<button class="app-tab ${c.id === activeCompanyId ? "is-active" : ""}" data-co="${c.id}">${esc(c.name)}<span class="at-sub">· ${JOB_LABEL[c.job] || ""}</span></button>`).join("");
+  }
+  function wireCompanyTabs(box) { $$("[data-co]", box).forEach((b) => b.addEventListener("click", () => setActiveCompany(b.dataset.co))); }
+  function setActiveCompany(id) { activeCompanyId = id; renderResearch(); renderCanvas(); }
+
+  /* ========================================================= 기업분석 ========================================================= */
+  $("#company-add-form").addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const name = $("#co-name").value.trim(); if (!name) return $("#co-name").focus();
+    const c = { id: uid(), name, job: $("#co-job").value, deadline: $("#co-deadline").value.trim(), limit: $("#co-limit").value.replace(/[^0-9]/g, ""),
+      research: { mission: "", values: "", bm: "", market: "", finance: "", jd: "", kpi: "", skills: "", news: "", trend: "" }, questions: [] };
+    store.companies.push(c); persist(); ev.target.reset();
+    activeCompanyId = c.id;
+    renderResearch(); renderCanvas(); renderCalendar(); renderDday();
+  });
+
+  function renderResearch() {
+    const tabs = $("#research-tabs"); tabs.innerHTML = companyTabsHTML(); wireCompanyTabs(tabs);
+    const body = $("#research-body"); body.className = "research-body";
+    const c = activeCompany();
+    if (!c) { body.innerHTML = `<div class="empty-note">기업을 추가하면 여기서 DNA·사업/시장/재무·직무 KPI·이슈를 정리할 수 있어요.</div>`; return; }
+    const r = c.research;
+    const ta = (k, ph) => `<textarea data-rs="${k}" rows="2" placeholder="${ph}">${esc(r[k] || "")}</textarea>`;
+    const inp = (k, ph) => `<input type="text" data-rs="${k}" placeholder="${ph}" value="${esc(r[k] || "")}" />`;
+
+    // 인재상 태그 → 경험 매칭
+    const ideals = (r.values || "").split(",").map((s) => s.trim()).filter(Boolean);
+    const recs = store.experiences.filter((e) => (e.tags || []).some((t) => ideals.some((v) => v.includes(t) || t.includes(v))));
+    const matchHTML = ideals.length
+      ? `<div class="rs-match">인재상 ${ideals.map((v) => "#" + esc(v)).join(" ")} → ` + (recs.length ? `추천 경험: <b>${recs.map((e) => esc(e.title)).join(", ")}</b>` : "매칭되는 경험이 아직 없어요. 관련 태그의 경험을 쌓아 보세요.") + `</div>`
+      : "";
+
+    body.innerHTML = `
+      <div class="rs-group">
+        <h4><span class="rs-num">1</span>기업의 기본 DNA <span class="hint">자소서 방향타</span></h4>
+        <p class="rs-help">지원동기·입사 후 포부·인재상 부합 여부의 기준이 되는 데이터예요.</p>
+        <div class="rs-fields">
+          <div class="field field-wide"><label>미션 / 비전</label>${ta("mission", "기업이 존재하는 이유와 나아가려는 방향")}</div>
+          <div class="field field-wide"><label>핵심 가치 / 인재상 <span class="hint">쉼표로 구분 (예: 도전, 소통)</span></label>${inp("values", "도전, 소통, 전문성")}</div>
+        </div>
+        ${matchHTML}
+      </div>
+      <div class="rs-group">
+        <h4><span class="rs-num">2</span>사업 · 시장 · 재무 <span class="hint">논리력 강화</span></h4>
+        <p class="rs-help">"이 회사 최고예요" 대신 실무자 관점의 논리를 펼치기 위한 요소예요. (DART/AI 3줄 요약으로 확장 예정)</p>
+        <div class="rs-fields">
+          <div class="field field-wide"><label>핵심 비즈니스 모델(BM)</label>${ta("bm", "무엇으로 누구에게 돈을 버는가 (주력 제품/서비스·주요 고객사)")}</div>
+          <div class="field"><label>시장 내 위치 / 경쟁사</label>${ta("market", "업계 순위·경쟁사 대비 강점/약점")}</div>
+          <div class="field"><label>재무 상태 / 투자 동향</label>${ta("finance", "흑자/적자·최근 집중 투자 영역(R&D·신사업 등)")}</div>
+        </div>
+      </div>
+      <div class="rs-group">
+        <h4><span class="rs-num">3</span>직무 분석 & KPI <span class="hint">직무 역량 어필</span></h4>
+        <p class="rs-help">"열심히"가 아니라 "이 지표를 개선하겠습니다"를 쓰기 위한 정보예요. KPI는 쉼표로 구분하면 자소서 빌더에서 단어장으로 떠요.</p>
+        <div class="rs-fields">
+          <div class="field field-wide"><label>직무 기술서(JD)</label>${ta("jd", "해당 직무의 일상 업무 프로세스")}</div>
+          <div class="field"><label>핵심 성과 지표(KPI) <span class="hint">쉼표 구분</span></label>${inp("kpi", "공정 효율성 % 향상, 예산 절감률")}</div>
+          <div class="field"><label>필요 역량 / 스킬</label>${ta("skills", "우대 자격증·툴·기술")}</div>
+        </div>
+      </div>
+      <div class="rs-group">
+        <h4><span class="rs-num">4</span>이슈 & 트렌드 <span class="hint">관심도 증명</span></h4>
+        <p class="rs-help">면접·포부 항목에서 강력한 '시의성 있는 데이터'예요. (기업별 실시간 뉴스 카드로 확장 예정)</p>
+        <div class="rs-fields">
+          <div class="field field-wide"><label>최근 1개년 주요 뉴스</label>${ta("news", "신사업 런칭·MOU·수상 실적 등")}</div>
+          <div class="field field-wide"><label>메가 트렌드와의 결합</label>${ta("trend", "ESG·디지털 트랜스포메이션 적용 사례 등")}</div>
+        </div>
+      </div>
+      <div class="rs-save-row"><button class="btn btn-primary" id="rs-save">기업분석 저장</button></div>`;
+
+    $("#rs-save").addEventListener("click", () => {
+      $$("[data-rs]", body).forEach((el) => { c.research[el.dataset.rs] = el.value.trim(); });
+      persist(); renderResearch(); renderCanvas();
+      flash($("#rs-save"), "저장됨 ✓");
+    });
+  }
+
+  /* ========================================================= 자소서 빌더 ========================================================= */
+  function composeDraft(e) {
+    const st = e.star || {};
+    if (st.s || st.t || st.a || st.r) return [`[${e.title}]`, st.s && `상황) ${st.s}`, st.t && `과제) ${st.t}`, st.a && `행동) ${st.a}`, st.r && `결과) ${st.r}`].filter(Boolean).join("\n");
+    return `[${e.title}] ${e.summary || ""}`.trim();
+  }
+  function renderCanvasExpList() {
+    const box = $("#canvas-exp-list"); if (!box) return;
+    const c = activeCompany();
+    const recComps = c ? [...new Set(c.questions.flatMap((q) => questionComps(q.text)))] : [];
+    if (!store.experiences.length) { box.innerHTML = `<div class="empty-note">경험 아카이브에서 경험을 먼저 추가해 주세요.</div>`; return; }
+    const list = store.experiences.slice().sort((a, b) => (b.tags || []).some((t) => recComps.includes(t)) - (a.tags || []).some((t) => recComps.includes(t)));
+    box.innerHTML = list.map((e) => tlCardHTML(e, { draggable: true, recommend: (e.tags || []).some((t) => recComps.includes(t)) })).join("");
+    $$("[data-exp]", box).forEach((el) => {
+      el.addEventListener("dragstart", (ev) => { ev.dataTransfer.setData("text/plain", el.dataset.exp); el.classList.add("dragging"); });
+      el.addEventListener("dragend", () => el.classList.remove("dragging"));
+    });
+  }
+  function renderWordbank() {
+    const box = $("#kpi-wordbank"); const c = activeCompany();
+    const kpis = c ? (c.research.kpi || "").split(",").map((s) => s.trim()).filter(Boolean) : [];
+    if (!kpis.length) { box.innerHTML = `<div class="wb-title">KPI 단어장 <span class="hint">기업분석 3번에 KPI를 쉼표로 입력하면 여기에 떠요</span></div>`; return; }
+    box.innerHTML = `<div class="wb-title">KPI 단어장 <span class="hint">클릭하면 방금 쓰던 답변 칸에 삽입돼요</span></div><div class="wb-chips">${kpis.map((k) => `<button class="wb-chip" data-kpi="${esc(k)}">${esc(k)}</button>`).join("")}</div>`;
+    $$("[data-kpi]", box).forEach((b) => b.addEventListener("click", () => {
+      if (!lastAnswerEl) return;
+      const v = b.dataset.kpi, s = lastAnswerEl.selectionStart || lastAnswerEl.value.length;
+      lastAnswerEl.value = lastAnswerEl.value.slice(0, s) + v + lastAnswerEl.value.slice(s);
+      lastAnswerEl.dispatchEvent(new Event("input"));
+      lastAnswerEl.focus();
+    }));
+  }
+  function renderCanvasQuestions() {
+    const box = $("#canvas-questions"); const c = activeCompany();
+    if (!c) { box.innerHTML = `<div class="empty-note">기업을 추가하면 여기서 문항에 답을 작성할 수 있어요.</div>`; return; }
+    if (!c.questions.length) { box.innerHTML = `<div class="empty-note">${esc(c.name)}에 등록된 문항이 없어요. 위에서 문항을 추가해 보세요.</div>`; return; }
+    box.innerHTML = c.questions.map((q) => {
+      const rec = questionComps(q.text);
+      const lim = q.limit || c.limit || "";
+      return `<div class="cq-card" data-q="${q.id}">
+        <div class="cq-head"><div class="cq-q">Q. ${esc(q.text)}</div><button class="link-btn" data-delq="${q.id}">삭제</button></div>
+        <div class="cq-rec">${rec.length ? "추천 경험 태그: " + rec.map((r) => "#" + r).join(" ") : "왼쪽 경험을 자유롭게 드래그해 보세요."}</div>
+        <textarea class="cq-answer" data-ans="${q.id}" spellcheck="true" placeholder="왼쪽 경험 카드를 여기로 드래그하면 STAR 초안이 채워집니다.">${esc(q.answer || "")}</textarea>
+        <div class="cq-bar"><span class="cq-count" data-count="${q.id}"></span>
+          <button class="btn btn-ghost btn-sm" data-short="${q.id}">요약</button>
+          <button class="btn btn-ghost btn-sm" data-expand="${q.id}">확장</button>
+        </div></div>`;
+    }).join("");
+
+    c.questions.forEach((q) => {
+      const ta = box.querySelector(`[data-ans="${q.id}"]`);
+      const countEl = box.querySelector(`[data-count="${q.id}"]`);
+      const lim = Number(q.limit || c.limit) || 0;
+      const upd = () => { countEl.textContent = `${ta.value.length}자${lim ? " / " + lim + "자" : ""}`; countEl.classList.toggle("over", lim && ta.value.length > lim); };
+      upd();
+      ta.addEventListener("focus", () => { lastAnswerEl = ta; });
+      ta.addEventListener("input", () => { q.answer = ta.value; upd(); });
+      ta.addEventListener("blur", () => persist());
+      ta.addEventListener("dragover", (ev) => { ev.preventDefault(); ta.classList.add("dropping"); });
+      ta.addEventListener("dragleave", () => ta.classList.remove("dropping"));
+      ta.addEventListener("drop", (ev) => {
+        ev.preventDefault(); ta.classList.remove("dropping");
+        const e = store.experiences.find((x) => x.id === ev.dataTransfer.getData("text/plain")); if (!e) return;
+        const chunk = composeDraft(e);
+        ta.value = ta.value ? ta.value.replace(/\s*$/, "") + "\n\n" + chunk : chunk;
+        q.answer = ta.value; upd(); persist(); lastAnswerEl = ta;
+      });
+      box.querySelector(`[data-short="${q.id}"]`).addEventListener("click", () => {
+        const l = lim || Math.max(50, Math.floor(ta.value.length * 0.7));
+        let t = ta.value.replace(/\n{2,}/g, "\n").replace(/[ \t]{2,}/g, " ").trim();
+        if (t.length > l) t = t.slice(0, l).replace(/\s+\S*$/, "") + " …";
+        ta.value = t; q.answer = t; upd(); persist();
+      });
+      box.querySelector(`[data-expand="${q.id}"]`).addEventListener("click", () => {
+        ta.value = ta.value.replace(/\s*$/, "") + " 이 경험에서 얻은 역량을 귀사의 직무에서도 지속적으로 발휘하겠습니다.";
+        q.answer = ta.value; upd(); persist();
+      });
+    });
+    $$("[data-delq]", box).forEach((b) => b.addEventListener("click", () => {
+      c.questions = c.questions.filter((x) => x.id !== b.dataset.delq); persist(); renderCanvasQuestions(); renderDday();
+    }));
+  }
+  function renderCanvas() {
+    const tabs = $("#canvas-tabs"); tabs.innerHTML = companyTabsHTML(); wireCompanyTabs(tabs);
+    // 기업분석 탭 활성 표시도 동기화
+    const rt = $("#research-tabs"); if (rt) { rt.innerHTML = companyTabsHTML(); wireCompanyTabs(rt); }
+    renderWordbank(); renderCanvasExpList(); renderCanvasQuestions();
+  }
+  $("#question-add-form").addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const c = activeCompany();
+    if (!c) { alert("먼저 기업분석에서 기업을 추가해 주세요."); return; }
+    const text = $("#q-text").value.trim(); if (!text) return $("#q-text").focus();
+    c.questions.push({ id: uid(), text, answer: "", limit: $("#q-limit").value.replace(/[^0-9]/g, "") });
+    persist(); ev.target.reset(); renderCanvasQuestions(); renderDday();
+  });
+
+  /* ---------- 저장 피드백 ---------- */
+  function flash(btn, msg) { if (!btn) return; const o = btn.textContent; btn.textContent = msg; btn.disabled = true; setTimeout(() => { btn.textContent = o; btn.disabled = false; }, 1100); }
+
+  /* ========================================================= 초기 렌더 ========================================================= */
+  seedIfEmpty();
+  renderCalendar();
+  renderDashboard();
+  renderTagPicker();
+  renderTimeline();
+  renderStarBuilder();
+  renderWorkshop();
+  renderResearch();
+  renderCanvas();
+})();
+
+  </script>
+</body>
+</html>
